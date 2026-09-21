@@ -1,0 +1,79 @@
+راهنمای عکس‌ها
+================
+هر آیتم منو دنبال یک عکس با این اسم دقیق توی همین پوشه (images) می‌گرده.
+اگه عکس نباشه، جاش یه پترن خاکستری ساده نشون داده میشه و چیزی خراب نمیشه.
+
+فرمت: jpg   |   سایز پیشنهادی: مربعی، حداقل 300x300
+
+--- صبحانه ---
+omelet.jpg                     → املت
+nimro.jpg                      → نیمرو
+homayouni.jpg                  → همایونی
+shapouri.jpg                   → شاپوری
+panir-boreshte.jpg             → پنیر برشته
+adasi.jpg                      → عدسی
+lubia.jpg                      → لوبیا
+lubia-adasi.jpg                → لوبیا عدسی
+sobhane-englisi.jpg            → صبحانه انگلیسی
+khame-asal.jpg                 → خامه عسل
+sobhane-irani.jpg              → صبحانه ایرانی
+sobhane-rezhimi.jpg            → صبحانه رژیمی
+panini-egg-bacon.jpg           → پنینی اگ بیکن
+french-toast.jpg               → فرنچ تست
+
+--- بشقاب‌های گریل ---
+royal-steak.jpg                → رویال استیک
+chicken-steak.jpg              → چیکن استیک
+steak-double-cut.jpg           → استیک دابل کات
+chicken-fit.jpg                → چیکن فیت
+
+--- پاستا ---
+chicken-alfredo.jpg            → چیکن آلفردو
+chicken-pesto.jpg              → چیکن پستو
+polo-picante.jpg               → پولو پیکانته
+
+--- برگر ---
+classic-burger.jpg             → کلاسیک برگر
+cheese-burger.jpg              → چیز برگر
+mushroom-burger.jpg            → ماشروم برگر
+smoky-burger.jpg               → اسموکی برگر
+zinger.jpg                     → زینگر
+
+--- پیش غذا ---
+french-fries.jpg               → فرنچ فرایز
+bacon-fries.jpg                → بیکن فرایز
+mushroom-fries.jpg             → ماشروم فرایز
+cheese-fries.jpg               → چیز فرایز
+chicken-fries.jpg              → چیکن فرایز
+beef-fries.jpg                 → بیف فرایز
+garlic-bread-classic.jpg       → نان سیر کلاسیک
+
+--- سالادها ---
+caesar-grill.jpg               → سزار گریل
+caesar-crispy.jpg              → سزار سوخاری
+fresco-pesto.jpg               → فرسکو پستو
+salad-fasl.jpg                 → سالاد فصل
+
+--- پنینی ---
+sanopolo.jpg                   → سانوپولو
+chicken-spinach.jpg            → چیکن اسپیناج
+panini-steak.jpg               → پنینی استیک
+
+--- پیتزا رومانو ایتالیایی ---
+diavola.jpg                    → دیاوولا
+sir-o-steak.jpg                → سیر و استیک
+pepperoni-romano.jpg           → پپرونی
+chicken-pesto-romano.jpg       → چیکن پستو
+smoky-bacon.jpg                → اسموکی بیکن
+
+--- پیتزا آمریکایی ---
+pizza-makhsous.jpg             → پیتزا مخصوص
+pizza-chicken-alfredo.jpg      → پیتزا چیکن آلفردو
+pizza-pulled-beef.jpg          → پیتزا پولد بیف
+pizza-pepperoni.jpg            → پیتزا پپرونی
+pizza-chicken-beef.jpg         → پیتزا چیکن بیف
+
+--- سوخاری ---
+fillet-strips-3.jpg            → فیله استرپیس ۳ تیکه
+fillet-strips-4.jpg            → فیله استرپیس ۴ تیکه
+wings-drumsticks.jpg           → بال و کتف سوخاری
