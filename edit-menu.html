@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ویرایش منو | روجانو</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brick:#5C1E27; --brick-dark:#3B1218; --ink:#1B1613;
+    --bg:#5A5A5A; --card:#F2EFE9; --line:#D8D2C7; --white:#FBFAF7;
+  }
+  *{box-sizing:border-box;}
+  body{font-family:'Vazirmatn',sans-serif; background:var(--bg); margin:0; color:var(--ink); padding-bottom:100px;}
+  header{background:linear-gradient(180deg,var(--brick),var(--brick-dark)); color:var(--white); padding:20px 16px; text-align:center; position:sticky; top:0; z-index:5; box-shadow:0 4px 12px rgba(0,0,0,.3);}
+  header h1{font-size:18px; margin:0 0 4px;}
+  header p{font-size:12.5px; opacity:.85; margin:0;}
+  main{max-width:640px; margin:0 auto; padding:14px;}
+  .cat{background:var(--card); border-radius:10px; margin-bottom:14px; padding:12px; border:1px solid var(--line);}
+  .cat h2{font-size:15px; color:var(--brick); margin:0 0 10px; display:flex; align-items:center; gap:6px;}
+  .item{background:var(--white); border:1px solid var(--line); border-radius:8px; padding:10px; margin-bottom:8px;}
+  .row{display:flex; gap:8px; align-items:center;}
+  label{font-size:11px; color:#7a756e; display:block; margin-bottom:3px;}
+  input[type=text], input[type=number], textarea{
+    width:100%; border:1px solid var(--line); border-radius:6px; padding:7px 8px;
+    font-family:inherit; font-size:13.5px; background:#fff; color:var(--ink);
+  }
+  .name-field{flex:2;}
+  .price-field{flex:1; min-width:90px;}
+  textarea{margin-top:6px; resize:vertical; min-height:36px;}
+  .topping-row{display:flex; gap:8px; margin-bottom:6px; align-items:center;}
+  .topping-row .name-field{flex:2;} .topping-row .price-field{flex:1;}
+  footer{position:fixed; bottom:0; left:0; right:0; background:var(--ink); padding:12px 16px; display:flex; gap:10px; box-shadow:0 -4px 14px rgba(0,0,0,.35);}
+  button{flex:1; padding:13px; border:none; border-radius:8px; font-family:inherit; font-size:14px; font-weight:700; cursor:pointer;}
+  #downloadBtn{background:var(--brick); color:#fff;}
+  #status{max-width:640px; margin:0 auto 10px; padding:0 14px; font-size:12.5px; color:#fff; text-align:center;}
+  .hint{font-size:11.5px; color:#847f77; margin-top:8px; line-height:1.8;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ویرایش منوی روجانو</h1>
+  <p>قیمت، اسم یا توضیح هر آیتم رو تغییر بده، بعد پایین صفحه دانلود کن</p>
+</header>
+
+<main id="formRoot"></main>
+
+<div id="status"></div>
+<footer>
+  <button id="downloadBtn">📥 دانلود menu-data.js جدید</button>
+</footer>
+
+<script src="menu-data.js"></script>
+<script>
+const root = document.getElementById('formRoot');
+
+MENU.forEach((cat, ci)=>{
+  const catBox = document.createElement('div');
+  catBox.className = 'cat';
+  catBox.innerHTML = `<h2>${cat.emoji||''} ${cat.title}</h2>`;
+
+  cat.items.forEach((entry, ii)=>{
+    if(!Array.isArray(entry) && entry.toppings){
+      const tBox = document.createElement('div');
+      tBox.className = 'item';
+      tBox.innerHTML = `<label>🧂 تاپینگ‌ها</label>`;
+      entry.toppings.forEach((t, ti)=>{
+        const row = document.createElement('div');
+        row.className = 'topping-row';
+        row.innerHTML = `
+          <div class="name-field"><input type="text" value="${t[0]}" data-cat="${ci}" data-item="${ii}" data-topping="${ti}" data-field="tname"></div>
+          <div class="price-field"><input type="number" value="${t[1]}" data-cat="${ci}" data-item="${ii}" data-topping="${ti}" data-field="tprice"></div>
+        `;
+        tBox.appendChild(row);
+      });
+      catBox.appendChild(tBox);
+      return;
+    }
+    const [slug,name,price,desc] = entry;
+    const box = document.createElement('div');
+    box.className = 'item';
+    box.innerHTML = `
+      <div class="row">
+        <div class="name-field"><label>اسم</label><input type="text" value="${name}" data-cat="${ci}" data-item="${ii}" data-field="name"></div>
+        <div class="price-field"><label>قیمت (تومان)</label><input type="number" step="1000" value="${price}" data-cat="${ci}" data-item="${ii}" data-field="price"></div>
+      </div>
+      <label style="margin-top:6px;">توضیحات (اختیاری)</label>
+      <textarea data-cat="${ci}" data-item="${ii}" data-field="desc">${desc||''}</textarea>
+    `;
+    catBox.appendChild(box);
+  });
+
+  root.appendChild(catBox);
+});
+
+root.innerHTML += `<div class="hint">بعد از دانلود، فایل جدید رو جایگزین «menu-data.js» قبلی کن (کنار index.html و پوشه‌ی images) و همه رو دوباره توی Deploys نتلیفای بنداز.</div>`;
+
+document.getElementById('downloadBtn').addEventListener('click', ()=>{
+  // apply all current input values back into MENU
+  document.querySelectorAll('input,textarea').forEach(el=>{
+    const ci = el.dataset.cat, ii = el.dataset.item;
+    if(ci===undefined || ii===undefined) return;
+    const entry = MENU[ci].items[ii];
+    if(el.dataset.topping !== undefined){
+      const ti = el.dataset.topping;
+      if(el.dataset.field==='tname') entry.toppings[ti][0] = el.value;
+      if(el.dataset.field==='tprice') entry.toppings[ti][1] = Number(el.value)||0;
+      return;
+    }
+    if(el.dataset.field==='name') entry[1] = el.value;
+    if(el.dataset.field==='price') entry[2] = Number(el.value)||0;
+    if(el.dataset.field==='desc'){
+      if(el.value.trim()) entry[3] = el.value.trim();
+      else entry.length = 3; // remove desc entirely if emptied
+    }
+  });
+
+  const header = `/*
+  =====================================================
+  فایل قیمت‌ها و آیتم‌های منوی روجانو
+  =====================================================
+  این فایل با ابزار edit-menu.html ساخته/آپدیت شده.
+  می‌تونی بازم با همون ابزار ویرایشش کنی، یا مستقیم با
+  یه ویرایشگر متنی (VS Code, Notepad و...) دستی عوض کنی.
+  فرمت هر آیتم: ["اسم-فایل-عکس","اسم آیتم",قیمت,"توضیحات (اختیاری)"]
+  =====================================================
+*/
+
+`;
+  const body = 'const MENU = ' + JSON.stringify(MENU, null, 2) + ';\n';
+  const blob = new Blob([header + body], {type:'text/javascript'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'menu-data.js';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  document.getElementById('status').textContent = '✅ فایل menu-data.js دانلود شد.';
+});
+</script>
+</body>
+</html>

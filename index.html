@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>روجانو | منو</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brick:#5C1E27;
+    --brick-dark:#3B1218;
+    --brick-light:#B06B74;
+    --ink:#1B1613;
+    --charcoal:#2B2723;
+    --gray:#57534D;
+    --gray-light:#B9B3AA;
+    --desc:#E4E1DB;
+    --bg:#5A5A5A;
+    --card:#8B8B8B;
+    --line:#454545;
+    --white:#FBFAF7;
+    --slate:#151D23;
+    --slate-light:#26333B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:'Vazirmatn', sans-serif;
+    background-color:var(--bg);
+    background-image:
+      linear-gradient(rgba(35,33,31,.55), rgba(35,33,31,.55)),
+      url('images/bg-pattern.jpg');
+    background-repeat:repeat;
+    background-size:auto, 200px auto;
+    color:var(--ink);
+    overflow-x:hidden;
+  }
+  button{font-family:inherit; border:none; background:none; cursor:pointer;}
+
+  /* ===================== SPLASH ===================== */
+  #splash{
+    position:fixed; inset:0;
+    background:
+      radial-gradient(120% 90% at 50% 15%, var(--slate-light) 0%, var(--slate) 55%, #0A0F12 100%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    z-index:50; transition:opacity .5s ease, visibility .5s ease;
+    padding:24px;
+  }
+  #splash.hidden{opacity:0; visibility:hidden; pointer-events:none;}
+
+  .pizza-wrap{
+    width:min(68vw, 280px); aspect-ratio:1/1;
+    position:relative;
+    cursor:pointer;
+    -webkit-tap-highlight-color: transparent;
+    filter:drop-shadow(0 18px 30px rgba(0,0,0,.55));
+    border-radius:50%;
+    background:radial-gradient(circle, var(--brick) 0%, var(--brick-dark) 100%);
+  }
+  .pizza-logo{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    border-radius:50%;
+    object-fit:cover;
+    z-index:0;
+  }
+  .pslice{
+    position:absolute; inset:0;
+    background-image:url('images/pizza-hero.png');
+    background-size:cover;
+    background-position:center;
+    transition:transform .8s cubic-bezier(.22,1.6,.4,1);
+    transform:translate(0,0) rotate(0deg);
+    will-change:transform;
+    z-index:1;
+  }
+  .pizza-wrap.open .pslice{
+    transform:translate(var(--dx), var(--dy)) rotate(var(--rot));
+  }
+
+  .tap-hint{
+    margin-top:22px;
+    color:var(--gray-light);
+    font-size:13px;
+    letter-spacing:.02em;
+    opacity:.85;
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  #splash.opened .tap-hint{display:none;}
+  @keyframes pulse{0%,100%{opacity:.4} 50%{opacity:.9}}
+
+  .brand-reveal{
+    margin-top:22px;
+    display:flex; flex-direction:column; align-items:center; gap:16px;
+  }
+  .view-menu-btn{
+    margin-top:2px;
+    padding:13px 34px;
+    border:1.5px solid var(--brick-light);
+    color:var(--white);
+    font-size:15px; font-weight:600;
+    border-radius:2px;
+    letter-spacing:.03em;
+    opacity:0; transform:translateY(10px);
+    transition:opacity .6s ease .15s, transform .6s ease .15s, background .25s ease, color .25s ease;
+  }
+  .view-menu-btn:active{background:var(--brick-light); color:var(--ink);}
+  .brand-reveal.show .view-menu-btn{opacity:1; transform:translateY(0);}
+
+  /* ===================== MENU PAGE ===================== */
+  #menu{opacity:0; visibility:hidden; transition:opacity .5s ease .1s, visibility .5s ease .1s;}
+  #menu.show{opacity:1; visibility:visible;}
+
+  html{scroll-behavior:smooth;}
+
+  header.top{
+    position:sticky; top:0; z-index:20;
+    background:linear-gradient(180deg, var(--brick) 0%, var(--brick-dark) 100%);
+    box-shadow:0 4px 14px rgba(0,0,0,.35);
+    padding:22px 20px 0;
+  }
+  .top-brand{
+    display:flex; align-items:center; justify-content:center;
+    padding-bottom:14px;
+  }
+  .top-brand img{height:76px; width:auto; filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));}
+
+  nav.cats{
+    display:flex; gap:8px; overflow-x:auto;
+    padding-bottom:12px;
+    scrollbar-width:none;
+  }
+  nav.cats::-webkit-scrollbar{display:none;}
+  nav.cats a{
+    flex:0 0 auto;
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    color:rgba(255,255,255,.85);
+    font-size:12px; font-weight:600;
+    padding:10px 14px;
+    border:1px solid rgba(255,255,255,.3);
+    border-radius:16px;
+    white-space:nowrap;
+    text-decoration:none;
+    transition:background .2s, color .2s, border-color .2s, box-shadow .2s;
+  }
+  nav.cats a .emoji{font-size:22px; line-height:1;}
+  nav.cats a.active{
+    background:var(--white);
+    color:var(--brick-dark);
+    border-color:var(--white);
+    font-weight:700;
+    box-shadow:0 3px 8px rgba(0,0,0,.3);
+  }
+
+  main{max-width:640px; margin:0 auto; padding:10px 16px 60px;}
+
+  section.cat{padding-top:28px; scroll-margin-top:150px;}
+  .cat-title{
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:14px;
+  }
+  .cat-title::before{
+    content:'';
+    width:22px; height:4px; border-radius:2px;
+    background:var(--brick);
+    flex:0 0 auto;
+  }
+  .cat-title h2{
+    font-size:20px; font-weight:800; color:var(--white);
+    letter-spacing:.01em;
+    text-shadow:0 1px 4px rgba(0,0,0,.5);
+  }
+  .cat-title .rule{flex:1; height:1px; background:var(--line);}
+
+  .item{
+    display:flex;
+    direction:ltr;
+    gap:14px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:11px 12px;
+    margin-bottom:11px;
+    box-shadow:0 3px 10px rgba(0,0,0,.14);
+    transition:transform .15s ease;
+  }
+  .item:active{transform:scale(.98);}
+  .item-img{
+    width:82px; height:82px; border-radius:6px;
+    background:
+      repeating-linear-gradient(135deg, #8D8D8D 0 8px, #808080 8px 16px);
+    overflow:hidden; flex:0 0 auto;
+    position:relative;
+  }
+  .item-img img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .item-text{direction:rtl; min-width:0; flex:1 1 auto; display:flex; flex-direction:column; justify-content:center; gap:4px;}
+  .item-head{display:flex; justify-content:space-between; align-items:baseline; gap:10px;}
+  .item-head h3{font-size:15.5px; font-weight:700; color:var(--brick);}
+  .item-head .price{font-size:14.5px; font-weight:800; color:var(--brick); white-space:nowrap; unicode-bidi:plaintext;}
+  .item-desc{font-size:12.5px; line-height:1.7; color:var(--desc); overflow-wrap:normal; word-break:keep-all;}
+
+  .toppings-box{
+    background:var(--card);
+    border:1px dashed var(--brick-light);
+    border-radius:10px;
+    padding:12px 14px 4px;
+    margin-bottom:11px;
+  }
+  .toppings-box .t-title{
+    display:flex; align-items:center; gap:8px;
+    color:var(--brick); font-weight:800; font-size:13.5px;
+    margin-bottom:6px;
+  }
+  .toppings-box .t-title::before{
+    content:''; width:14px; height:3px; border-radius:2px; background:var(--brick); flex:0 0 auto;
+  }
+  .toppings-row{
+    display:flex; justify-content:space-between; gap:10px;
+    padding:7px 0; border-bottom:1px solid var(--line);
+    font-size:12.5px;
+  }
+  .toppings-row:last-child{border-bottom:none;}
+  .toppings-row .tn{color:var(--ink);}
+  .toppings-row .tp{color:var(--brick); font-weight:700; white-space:nowrap; unicode-bidi:plaintext;}
+
+  footer{
+    text-align:center; padding:30px 20px 44px;
+    color:var(--white); font-size:12px; line-height:2; opacity:.8;
+    text-shadow:0 1px 4px rgba(0,0,0,.5);
+  }
+  footer .fname{color:var(--white); font-weight:800; font-size:15px; display:block; margin-bottom:4px; opacity:1;}
+</style>
+</head>
+<body>
+
+<!-- ===================== SPLASH SCREEN ===================== -->
+<div id="splash">
+  <div class="pizza-wrap" id="pizzaWrap">
+    <img class="pizza-logo" src="images/logo.png" alt="روجانو کافه رستوران">
+  </div>
+  <div class="tap-hint" id="tapHint">برای مشاهده لمس کنید</div>
+  <div class="brand-reveal" id="brandReveal">
+    <button class="view-menu-btn" id="viewMenuBtn">مشاهده منو</button>
+  </div>
+</div>
+
+<!-- ===================== MENU PAGE ===================== -->
+<div id="menu">
+  <header class="top">
+    <div class="top-brand">
+      <img src="images/logo.png" alt="روجانو">
+    </div>
+    <nav class="cats" id="catNav"></nav>
+  </header>
+
+  <main id="mainContent"></main>
+
+  <footer>
+    <span class="fname">روجانو</span>
+    نوش جان
+  </footer>
+</div>
+
+<script src="menu-data.js"></script>
+<script>
+/* ===================== PIZZA SLICE ANIMATION (real photo) ===================== */
+(function(){
+  const wrap = document.getElementById('pizzaWrap');
+  const cx=50, cy=50, r=48, n=8; // percentages of the wrap's own box
+  const arcSteps = 5; // extra points along each wedge's outer arc, for a smooth circle
+
+  for(let i=0;i<n;i++){
+    const a0 = (i*(360/n) - 90) * Math.PI/180;
+    const a1 = ((i+1)*(360/n) - 90) * Math.PI/180;
+    const mid = (a0+a1)/2;
+
+    let points = ['50% 50%'];
+    for(let s=0; s<=arcSteps; s++){
+      const a = a0 + (a1-a0) * (s/arcSteps);
+      const x = (cx + r*Math.cos(a)).toFixed(2);
+      const y = (cy + r*Math.sin(a)).toFixed(2);
+      points.push(`${x}% ${y}%`);
+    }
+    const clip = `polygon(${points.join(', ')})`;
+
+    const dx = (Math.cos(mid)*24).toFixed(1)+'%';
+    const dy = (Math.sin(mid)*24).toFixed(1)+'%';
+    const rot = (i%2===0 ? 9 : -9);
+
+    const div = document.createElement('div');
+    div.className = 'pslice';
+    div.style.clipPath = clip;
+    div.style.webkitClipPath = clip;
+    div.style.setProperty('--dx', dx);
+    div.style.setProperty('--dy', dy);
+    div.style.setProperty('--rot', rot+'deg');
+    wrap.appendChild(div);
+  }
+
+  const splash = document.getElementById('splash');
+  const brandReveal = document.getElementById('brandReveal');
+
+  function openPizza(){
+    if(wrap.classList.contains('open')) return;
+    wrap.classList.add('open');
+    splash.classList.add('opened');
+    setTimeout(()=> brandReveal.classList.add('show'), 550);
+  }
+
+  wrap.addEventListener('click', openPizza);
+  splash.addEventListener('click', function(e){
+    if(e.target.closest('#viewMenuBtn')) return;
+    openPizza();
+  });
+
+  document.getElementById('viewMenuBtn').addEventListener('click', function(e){
+    e.stopPropagation();
+    splash.classList.add('hidden');
+    document.getElementById('menu').classList.add('show');
+  });
+})();
+
+/* MENU array (prices, items, descriptions) now lives in menu-data.js */
+
+function fmt(n){ return n.toLocaleString('en-US') + ' تومان'; }
+function fmtDesc(desc){
+  if(!desc) return '';
+  return desc.split('، ').map(seg => seg.replace(/ /g, '\u00A0')).join('، ');
+}
+
+/* ===================== RENDER ===================== */
+(function(){
+  const nav = document.getElementById('catNav');
+  const main = document.getElementById('mainContent');
+
+  MENU.forEach(cat=>{
+    const a = document.createElement('a');
+    a.href = '#'+cat.id;
+    a.innerHTML = `<span class="emoji">${cat.emoji}</span><span>${cat.title}</span>`;
+    a.dataset.target = cat.id;
+    nav.appendChild(a);
+
+    const section = document.createElement('section');
+    section.className = 'cat';
+    section.id = cat.id;
+
+    const titleWrap = document.createElement('div');
+    titleWrap.className = 'cat-title';
+    titleWrap.innerHTML = `<h2>${cat.title}</h2><div class="rule"></div>`;
+    section.appendChild(titleWrap);
+
+    cat.items.forEach(entry=>{
+      if(!Array.isArray(entry) && entry.toppings){
+        const box = document.createElement('div');
+        box.className = 'toppings-box';
+        box.innerHTML = `<div class="t-title">تاپینگ‌ها</div>` +
+          entry.toppings.map(([tname,tprice])=>
+            `<div class="toppings-row"><span class="tn">${tname}</span><span class="tp">${tprice>0 ? fmt(tprice) : 'رایگان'}</span></div>`
+          ).join('');
+        section.appendChild(box);
+        return;
+      }
+      const [slug,name,price,desc] = entry;
+      const item = document.createElement('div');
+      item.className = 'item';
+      item.innerHTML = `
+        <div class="item-img">
+          <img src="images/${slug}.jpg" alt="${name}" onerror="this.style.display='none'">
+        </div>
+        <div class="item-text">
+          <div class="item-head">
+            <h3>${name}</h3>
+            <span class="price">${fmt(price)}</span>
+          </div>
+          ${desc ? `<div class="item-desc">${fmtDesc(desc)}</div>` : ``}
+        </div>`;
+      section.appendChild(item);
+    });
+
+    main.appendChild(section);
+  });
+
+  // active category highlight on scroll
+  const navLinks = Array.from(nav.querySelectorAll('a'));
+  const sections = MENU.map(c=>document.getElementById(c.id));
+
+  navLinks.forEach(link=>{
+    link.addEventListener('click', e=>{
+      e.preventDefault();
+      document.getElementById(link.dataset.target).scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        navLinks.forEach(l=>l.classList.remove('active'));
+        const active = navLinks.find(l=>l.dataset.target===entry.target.id);
+        if(active){
+          active.classList.add('active');
+          active.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+        }
+      }
+    });
+  }, { rootMargin: '-110px 0px -70% 0px', threshold: 0 });
+
+  sections.forEach(s=>observer.observe(s));
+})();
+</script>
+</body>
+</html>
