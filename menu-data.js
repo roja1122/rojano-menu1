@@ -167,4 +167,6 @@ const MENU = [
     ["oreo-shake","اورئو",330000],
     ["banana-chocolate-shake","موز شکلات",330000],
     ["mama-shake","ماماشیک",290000]
-  ]},
+ ]}
+];
+  
