@@ -145,7 +145,18 @@
     text-decoration:none;
     transition:background .2s, color .2s, border-color .2s, box-shadow .2s;
   }
-  nav.cats a .emoji{font-size:22px; line-height:1;}
+ nav.cats a .cat-icon{
+  width:34px;
+  height:34px;
+  display:block;
+  flex:0 0 auto;
+  overflow:visible;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));
+}
+
+nav.cats a.active .cat-icon{
+  filter:brightness(.75) sepia(1) saturate(3) hue-rotate(295deg);
+}
   nav.cats a.active{
     background:var(--white);
     color:var(--brick-dark);
@@ -340,7 +351,13 @@ function fmtDesc(desc){
   MENU.forEach(cat=>{
     const a = document.createElement('a');
     a.href = '#'+cat.id;
-    a.innerHTML = `<span class="emoji">${cat.emoji}</span><span>${cat.title}</span>`;
+ a.innerHTML = 
+  <svg class="cat-icon" viewBox="0 0 96 96" aria-hidden="true">
+    <use href="images/icons/rojano-icons.svg#${cat.id}"
+         xlink:href="images/icons/rojano-icons.svg#${cat.id}"></use>
+  </svg>
+  <span>${cat.title}</span>
+;
     a.dataset.target = cat.id;
     nav.appendChild(a);
 
