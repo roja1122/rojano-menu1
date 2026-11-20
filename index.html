@@ -356,7 +356,7 @@ const CAT_ICONS = {
     a.href = '#'+cat.id;
 const iconFile = CAT_ICONS[cat.id] || cat.id;
     a.innerHTML = `
-      <img class="cat-icon" src="icons/${iconFile}.webp" alt="" width="52" height="44" decoding="async"${nav.children.length > 3 ? ' loading="lazy"' : ''}>
+      <img class="cat-icon" src="image/icons/${iconFile}.webp" alt="" width="52" height="44" decoding="async"${nav.children.length > 3 ? ' loading="lazy"' : ''}>
       <span>${cat.title}</span>
   `;
     a.dataset.target = cat.id;
