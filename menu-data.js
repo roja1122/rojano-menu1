@@ -118,55 +118,55 @@ const MENU = [
     ["wings-drumsticks","بال و کتف سوخاری",575000,"۳ تا بال، ۳ تا کتف، سیب‌زمینی سرخ‌کرده، سالاد کلم، سس مخصوص"]
   ]},
   { id:"hot-drinks", emoji:"☕", title:"نوشیدنی گرم", items:[
-    ["espresso","اسپرسو",180000],
-    ["americano","آمریکانو",190000],
-    ["cortado","کورتادو",190000],
-    ["cappuccino","کاپوچینو",230000],
-    ["cafe-latte","کافه لاته",270000],
-    ["flavored-latte","لاته",320000,"کارامل، فندق، نارگیل"],
-    ["mocha","موکا",320000],
-    ["persian-latte","پرشین لاته",290000],
-    ["nescafe-milk","شیر نسکافه",270000],
-    ["hot-chocolate","هات چاکلت",290000],
-    ["chocolate-milk","شیرکاکائو",250000],
-    ["masala","ماسالا",280000],
-    ["karak","کرک",290000]
+    ["espresso","اسپرسو",0],
+    ["americano","آمریکانو",0],
+    ["cortado","کورتادو",0],
+    ["cappuccino","کاپوچینو",0],
+    ["cafe-latte","کافه لاته",0],
+    ["flavored-latte","لاته",0,"کارامل، فندق، نارگیل"],
+    ["mocha","موکا",0],
+    ["persian-latte","پرشین لاته",0],
+    ["nescafe-milk","شیر نسکافه",0],
+    ["hot-chocolate","هات چاکلت",0],
+    ["chocolate-milk","شیرکاکائو",0],
+    ["masala","ماسالا",0],
+    ["karak","کرک",0]
   ]},
   { id:"iced-drinks", emoji:"🧊", title:"آیس", items:[
-    ["iced-americano","آمریکانو",190000],
-    ["iced-romano","رومانو",240000],
-    ["dalgona","دالگونا",270000],
-    ["iced-latte","لاته",270000],
-    ["iced-caramel-latte","کارامل لاته",320000],
-    ["iced-mocha","موکا",320000],
-    ["iced-chocolate","چاکلت",290000],
-    ["affogato","آفوگاتو",280000]
+    ["iced-americano","آمریکانو",0],
+    ["iced-romano","رومانو",0],
+    ["dalgona","دالگونا",0],
+    ["iced-latte","لاته",0],
+    ["iced-caramel-latte","کارامل لاته",0],
+    ["iced-mocha","موکا",0],
+    ["iced-chocolate","چاکلت",0],
+    ["affogato","آفوگاتو",0]
   ]},
   { id:"juice", emoji:"🍊", title:"آب میوه", items:[
-    ["orange-juice","آب پرتقال",250000],
-    ["pomegranate-juice","آب انار",280000],
-    ["watermelon-juice","آب هندوانه",220000]
+    ["orange-juice","آب پرتقال",0],
+    ["pomegranate-juice","آب انار",0],
+    ["watermelon-juice","آب هندوانه",0]
   ]},
   { id:"mocktail", emoji:"🍹", title:"ماکتیل", items:[
-    ["lemonade","لیموناد",230000],
-    ["mojito","موهیتو",240000],
-    ["red-mojito","رد موهیتو",270000],
-    ["white-summer","وایت سامر",320000],
-    ["raspberry","رزبری",320000]
+    ["lemonade","لیموناد",0],
+    ["mojito","موهیتو",0],
+    ["red-mojito","رد موهیتو",0],
+    ["white-summer","وایت سامر",0],
+    ["raspberry","رزبری",0]
   ]},
   { id:"smoothie", emoji:"🥤", title:"اسموتی", items:[
-    ["pina-colada","پیناکولادا",280000],
-    ["royal-smoothie","رویال",290000],
-    ["pinat-smoothie","پینات",290000],
-    ["tropical-smoothie","استوایی",290000]
+    ["pina-colada","پیناکولادا",0],
+    ["royal-smoothie","رویال",0],
+    ["pinat-smoothie","پینات",0],
+    ["tropical-smoothie","استوایی",0]
   ]},
   { id:"shake", emoji:"🥛", title:"شیک", items:[
-    ["nutella-shake","نوتلا",350000],
-    ["nutella-strawberry-shake","نوتلا توتفرنگی",370000],
-    ["mascarpone-shake","ماسکاربری",350000],
-    ["oreo-shake","اورئو",330000],
-    ["banana-chocolate-shake","موز شکلات",330000],
-    ["mama-shake","ماماشیک",290000]
+    ["nutella-shake","نوتلا",0],
+    ["nutella-strawberry-shake","نوتلا توتفرنگی",0],
+    ["mascarpone-shake","ماسکاربری",0],
+    ["oreo-shake","اورئو",0],
+    ["banana-chocolate-shake","موز شکلات",0],
+    ["mama-shake","ماماشیک",0]
  ]}
 ];
   
